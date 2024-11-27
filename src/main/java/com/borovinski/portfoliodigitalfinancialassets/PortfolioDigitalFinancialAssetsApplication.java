@@ -9,5 +9,4 @@ public class PortfolioDigitalFinancialAssetsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PortfolioDigitalFinancialAssetsApplication.class, args);
 	}
-
 }
