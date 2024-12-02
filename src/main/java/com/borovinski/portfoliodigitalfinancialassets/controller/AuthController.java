@@ -5,6 +5,7 @@ import com.borovinski.portfoliodigitalfinancialassets.config.JwtProvider;
 import com.borovinski.portfoliodigitalfinancialassets.model.TwoFactorOTP;
 import com.borovinski.portfoliodigitalfinancialassets.model.User;
 import com.borovinski.portfoliodigitalfinancialassets.repository.UserRepository;
+import com.borovinski.portfoliodigitalfinancialassets.response.AuthResponse;
 import com.borovinski.portfoliodigitalfinancialassets.service.CustomeUserDetailsService;
 import com.borovinski.portfoliodigitalfinancialassets.service.EmailService;
 import com.borovinski.portfoliodigitalfinancialassets.service.TwoFactorOtpService;
@@ -17,7 +18,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -121,11 +121,13 @@ public class AuthController {
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
 
+    @PostMapping("/two-factor/otp/{otp}")
     public ResponseEntity<AuthResponse> verifySignInOtp(
             @PathVariable String otp,
             @RequestParam String id) throws Exception {
 
         TwoFactorOTP twoFactorOTP = twoFactorOtpService.findById(id);
+
         if (twoFactorOtpService.verifyTwoFactorOtp(twoFactorOTP, otp)) {
             AuthResponse res = new AuthResponse();
             res.setMessage("Two factor authentication verified!");

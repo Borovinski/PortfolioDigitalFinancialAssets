@@ -1,4 +1,4 @@
-package com.borovinski.portfoliodigitalfinancialassets.controller;
+package com.borovinski.portfoliodigitalfinancialassets.response;
 
 import lombok.Data;
 
