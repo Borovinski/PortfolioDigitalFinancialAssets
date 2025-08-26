@@ -30,17 +30,17 @@
 
 ## 4. Стек технологий
 Backend:
-**-SpringBoot
-**-MySQL DB
-**-Spring Security
-**-Java Mail Sender
-**-Stripe API
-**-CoinGecko API
-**-Gemini API
+**SpringBoot
+**MySQL DB
+**Spring Security
+**Java Mail Sender
+**Stripe API
+**CoinGecko API
+**Gemini API
 Frontend:
-**-React
-**-Tailwind CSS
-**-Redux
-**-Axios
-**-React-Router-Dom
-**-Shadcn UI
+**React
+**Tailwind CSS
+**Redux
+**Axios
+**React-Router-Dom
+**Shadcn UI
