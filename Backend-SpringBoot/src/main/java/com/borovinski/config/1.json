@@ -1,0 +1,2598 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5454",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Endpoints for user authentication and registration"
+    }
+  ],
+  "paths": {
+    "/api/wallet/{walletId}/transfer": {
+      "put": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "walletToWalletTransfer",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletTransaction"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wallet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet/order/{orderId}/pay": {
+      "put": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "payOrderPayment",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wallet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet/deposit": {
+      "put": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "addMoneyToWallet",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "payment_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wallet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet/deposit/amount/{amount}": {
+      "put": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "depositMoney",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/profile": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUserProfileHandler",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "updateUserProfileHandler",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserProfileDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/change-password": {
+      "put": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "changePassword",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/bot": {
+      "post": {
+        "tags": [
+          "chat-bot-controller"
+        ],
+        "operationId": "simpleChat",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/bot/coin": {
+      "post": {
+        "tags": [
+          "chat-bot-controller"
+        ],
+        "operationId": "getCoinRealtimeTime",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/users/reset-password/send-otp": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "sendUpdatePasswordOTP",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/two-factor/otp/{otp}": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Verify 2FA OTP",
+        "description": "Verifies the OTP for two-factor authentication and returns JWT.",
+        "operationId": "verifySigningOtp",
+        "parameters": [
+          {
+            "name": "otp",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid OTP"
+          },
+          "200": {
+            "description": "OTP verified",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register a new user",
+        "description": "Creates a new user account and returns a JWT token upon successful registration.",
+        "operationId": "createUserHandler",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Registration successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or email already used"
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "User login",
+        "description": "Authenticates user and returns JWT. If 2FA is enabled, sends OTP and returns session ID.",
+        "operationId": "signing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/api/withdrawal/{amount}": {
+      "post": {
+        "tags": [
+          "withdrawal-controller"
+        ],
+        "operationId": "withdrawalRequest",
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/watchlist/create": {
+      "post": {
+        "tags": [
+          "watchlist-controller"
+        ],
+        "operationId": "createWatchlist",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Watchlist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/verification/{verificationType}/send-otp": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "sendVerificationOTP",
+        "parameters": [
+          {
+            "name": "verificationType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MOBILE",
+                "EMAIL"
+              ]
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/portfolio/rebalance": {
+      "post": {
+        "tags": [
+          "portfolio-controller"
+        ],
+        "operationId": "rebalancePortfolio",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payment/{paymentMethod}/amount/{amount}": {
+      "post": {
+        "tags": [
+          "payment-controller"
+        ],
+        "operationId": "paymentHandler",
+        "parameters": [
+          {
+            "name": "paymentMethod",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PADDLE",
+                "STRIPE"
+              ]
+            }
+          },
+          {
+            "name": "amount",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payment-details": {
+      "get": {
+        "tags": [
+          "payment-details-controller"
+        ],
+        "operationId": "getUsersPaymentDetails",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "payment-details-controller"
+        ],
+        "operationId": "addPaymentDetails",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentDetails"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/pay": {
+      "post": {
+        "tags": [
+          "order-controller"
+        ],
+        "operationId": "payOrderPayment_1",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/users/reset-password/verify-otp": {
+      "patch": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/watchlist/add/coin/{coinId}": {
+      "patch": {
+        "tags": [
+          "watchlist-controller"
+        ],
+        "operationId": "addItemToWatchlist",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coinId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Coin"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/enable-two-factor/verify-otp/{otp}": {
+      "patch": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "enabledTwoFactorAuthentication",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otp",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/withdrawal/{id}/proceed/{accept}": {
+      "patch": {
+        "tags": [
+          "withdrawal-controller"
+        ],
+        "operationId": "proceedWithdrawal",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "accept",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users/{id}/toggle-lock": {
+      "patch": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "toggleUserLock",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users/{id}/change-role": {
+      "patch": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "changeUserRole",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins": {
+      "get": {
+        "tags": [
+          "coin-controller"
+        ],
+        "operationId": "getCoinList",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins/{coinId}/chart": {
+      "get": {
+        "tags": [
+          "coin-controller"
+        ],
+        "operationId": "getMarketChart",
+        "parameters": [
+          {
+            "name": "coinId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins/trading": {
+      "get": {
+        "tags": [
+          "coin-controller"
+        ],
+        "operationId": "getTreadingCoin",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins/top50": {
+      "get": {
+        "tags": [
+          "coin-controller"
+        ],
+        "operationId": "getTop50CoinByMarketCapRank",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins/search": {
+      "get": {
+        "tags": [
+          "coin-controller"
+        ],
+        "operationId": "searchCoin",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coins/details/{coinId}": {
+      "get": {
+        "tags": [
+          "coin-controller"
+        ],
+        "operationId": "getCoinDetails",
+        "parameters": [
+          {
+            "name": "coinId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/coin/{coinName}": {
+      "get": {
+        "tags": [
+          "chat-bot-controller"
+        ],
+        "operationId": "getCoinDetails_1",
+        "parameters": [
+          {
+            "name": "coinName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoinDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/withdrawal": {
+      "get": {
+        "tags": [
+          "withdrawal-controller"
+        ],
+        "operationId": "getWithdrawalHistory",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Withdrawal"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/watchlist/{watchlistId}": {
+      "get": {
+        "tags": [
+          "watchlist-controller"
+        ],
+        "operationId": "getWatchlistById",
+        "parameters": [
+          {
+            "name": "watchlistId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Watchlist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/watchlist/user": {
+      "get": {
+        "tags": [
+          "watchlist-controller"
+        ],
+        "operationId": "getUserWatchlist",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Watchlist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet": {
+      "get": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "getUserWallet",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallet/transactions": {
+      "get": {
+        "tags": [
+          "wallet-controller"
+        ],
+        "operationId": "getWalletTransaction",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WalletTransaction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{userId}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "findUserById",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/email/{email}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "findUserByEmail",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/portfolio/profitability/per-coin": {
+      "get": {
+        "tags": [
+          "portfolio-controller"
+        ],
+        "operationId": "getProfitabilityPerCoin",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CoinProfitabilityDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/portfolio/optimize": {
+      "get": {
+        "tags": [
+          "portfolio-controller"
+        ],
+        "operationId": "optimizePortfolio",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetRecommendationDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/portfolio/diversification": {
+      "get": {
+        "tags": [
+          "portfolio-controller"
+        ],
+        "operationId": "getDiversification",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DiversificationDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "tags": [
+          "order-controller"
+        ],
+        "operationId": "getAllOrdersForUser",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "asset_symbol",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/{orderId}": {
+      "get": {
+        "tags": [
+          "order-controller"
+        ],
+        "operationId": "getOrderById",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assets": {
+      "get": {
+        "tags": [
+          "asset-controller"
+        ],
+        "operationId": "getAssetsForUser",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Asset"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assets/{assetId}": {
+      "get": {
+        "tags": [
+          "asset-controller"
+        ],
+        "operationId": "getAssetById",
+        "parameters": [
+          {
+            "name": "assetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assets/coin/{coinId}/user": {
+      "get": {
+        "tags": [
+          "asset-controller"
+        ],
+        "operationId": "getAssetByUserIdAndCoinId",
+        "parameters": [
+          {
+            "name": "coinId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/withdrawal": {
+      "get": {
+        "tags": [
+          "withdrawal-controller"
+        ],
+        "operationId": "getAllWithdrawalRequest",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Withdrawal"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getAllUsers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/stats": {
+      "get": {
+        "tags": [
+          "admin-stats-controller"
+        ],
+        "operationId": "getStats",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "home-controller"
+        ],
+        "operationId": "homeController_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/watchlist/remove/coin/{coinId}": {
+      "delete": {
+        "tags": [
+          "watchlist-controller"
+        ],
+        "operationId": "removeItemFromWatchlist",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coinId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TwoFactorAuth": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "sendTo": {
+            "type": "string",
+            "enum": [
+              "MOBILE",
+              "EMAIL"
+            ]
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "VERIFIED",
+              "PENDING"
+            ]
+          },
+          "twoFactorAuth": {
+            "$ref": "#/components/schemas/TwoFactorAuth"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ROLE_ADMIN",
+              "ROLE_USER"
+            ]
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "accountNonLocked": {
+            "type": "boolean"
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Wallet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "balance": {
+            "type": "number"
+          }
+        }
+      },
+      "WalletTransaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "wallet": {
+            "$ref": "#/components/schemas/Wallet"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "WITHDRAWAL",
+              "WALLET_TRANSFER",
+              "ADD_MONEY",
+              "BUY_ASSET",
+              "SELL_ASSET"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "transferId": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PaymentResponse": {
+        "type": "object",
+        "properties": {
+          "payment_url": {
+            "type": "string"
+          }
+        }
+      },
+      "UserProfileDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "ChangePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "currentPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PromptBody": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdatePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "sendTo": {
+            "type": "string"
+          },
+          "verificationType": {
+            "type": "string",
+            "enum": [
+              "MOBILE",
+              "EMAIL"
+            ]
+          }
+        }
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "jwt": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "session": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "twoFactorAuthEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Coin": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "current_price": {
+            "type": "number",
+            "format": "double"
+          },
+          "market_cap": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "market_cap_rank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fully_diluted_valuation": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total_volume": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "high_24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "low_24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "price_change_24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "price_change_percentage_24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "market_cap_change_24h": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "market_cap_change_percentage_24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "circulating_supply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total_supply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "max_supply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ath": {
+            "type": "number",
+            "format": "double"
+          },
+          "ath_change_percentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "ath_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "atl": {
+            "type": "number",
+            "format": "double"
+          },
+          "atl_change_percentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "atl_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Watchlist": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "coins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coin"
+            }
+          }
+        }
+      },
+      "PaymentDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "accountHolderName": {
+            "type": "string"
+          },
+          "ifsc": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "CreateOrderRequest": {
+        "type": "object",
+        "properties": {
+          "coinId": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderType": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "SELL"
+            ]
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "orderType": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "SELL"
+            ]
+          },
+          "price": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "FILLED",
+              "CANCELLED",
+              "PARTIALLY_FILLED",
+              "ERROR",
+              "SUCCESS"
+            ]
+          },
+          "orderItem": {
+            "$ref": "#/components/schemas/OrderItem"
+          }
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "coin": {
+            "$ref": "#/components/schemas/Coin"
+          },
+          "buyPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "sellPrice": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "ResetPasswordRequest": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "otp": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonNode": {
+        "type": "object"
+      },
+      "CoinDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "currentPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "marketCap": {
+            "type": "number",
+            "format": "double"
+          },
+          "marketCapRank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalVolume": {
+            "type": "number",
+            "format": "double"
+          },
+          "high24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "low24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "priceChange24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "priceChangePercentage24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "marketCapChange24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "marketCapChangePercentage24h": {
+            "type": "number",
+            "format": "double"
+          },
+          "circulatingSupply": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalSupply": {
+            "type": "number",
+            "format": "double"
+          },
+          "ath": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "athChangePercentage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "athDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "atl": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "atlChangePercentage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "atlDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Withdrawal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "SUCCESS",
+              "DECLINE"
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CoinProfitabilityDTO": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "buyPrice": {
+            "type": "number"
+          },
+          "currentPrice": {
+            "type": "number"
+          },
+          "invested": {
+            "type": "number"
+          },
+          "current": {
+            "type": "number"
+          },
+          "profit": {
+            "type": "number"
+          },
+          "profitPercent": {
+            "type": "number"
+          }
+        }
+      },
+      "AssetRecommendationDTO": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "currentPercent": {
+            "type": "number"
+          },
+          "targetPercent": {
+            "type": "number"
+          },
+          "difference": {
+            "type": "number"
+          }
+        }
+      },
+      "DiversificationDTO": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "currentValue": {
+            "type": "number"
+          },
+          "percentage": {
+            "type": "number"
+          }
+        }
+      },
+      "Asset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "buyPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "coin": {
+            "$ref": "#/components/schemas/Coin"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      }
+    }
+  }
+}
